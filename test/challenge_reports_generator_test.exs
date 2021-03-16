@@ -179,4 +179,185 @@ defmodule ChallengeReportsGeneratorTest do
       assert response == expected_response
     end
   end
+
+  describe "build_from_many/1" do
+    test "builds the report from many files" do
+      file_name = ["gen_report_test.csv", "gen_report_test.csv", "gen_report_test.csv"]
+
+      response = ChallengeReportsGenerator.build_from_many(file_name)
+
+      expected_response =
+        {:ok,
+         %{
+           "all_hours" => %{
+             "Cleiton" => 36,
+             "Daniele" => 63,
+             "Danilo" => 21,
+             "Diego" => 36,
+             "Giuliano" => 42,
+             "Jakeliny" => 66,
+             "Joseph" => 39,
+             "Mayk" => 57,
+             "Rafael" => 21,
+             "Vinicius" => 0
+           },
+           "hours_per_month" => %{
+             "Cleiton" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 12,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 24,
+               "setembro" => 0
+             },
+             "Daniele" => %{
+               "abril" => 21,
+               "agosto" => 0,
+               "dezembro" => 15,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 3,
+               "maio" => 24,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Danilo" => %{
+               "abril" => 3,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 18,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Diego" => %{
+               "abril" => 12,
+               "agosto" => 12,
+               "dezembro" => 3,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 9
+             },
+             "Giuliano" => %{
+               "abril" => 3,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 27,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 12,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Jakeliny" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 24,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 42,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Joseph" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 6,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 9,
+               "novembro" => 15,
+               "outubro" => 0,
+               "setembro" => 9
+             },
+             "Mayk" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 15,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 21,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 21
+             },
+             "Rafael" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 21,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Vinicius" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             }
+           },
+           "hours_per_year" => %{
+             "Cleiton" => %{"2016" => 9, "2017" => 0, "2018" => 0, "2019" => 0, "2020" => 27},
+             "Daniele" => %{"2016" => 30, "2017" => 9, "2018" => 21, "2019" => 0, "2020" => 3},
+             "Danilo" => %{"2016" => 0, "2017" => 0, "2018" => 3, "2019" => 18, "2020" => 0},
+             "Diego" => %{"2016" => 9, "2017" => 24, "2018" => 0, "2019" => 3, "2020" => 0},
+             "Giuliano" => %{"2016" => 0, "2017" => 9, "2018" => 0, "2019" => 18, "2020" => 15},
+             "Jakeliny" => %{"2016" => 24, "2017" => 24, "2018" => 0, "2019" => 18, "2020" => 0},
+             "Joseph" => %{"2016" => 0, "2017" => 9, "2018" => 0, "2019" => 9, "2020" => 21},
+             "Mayk" => %{"2016" => 21, "2017" => 24, "2018" => 0, "2019" => 12, "2020" => 0},
+             "Rafael" => %{"2016" => 0, "2017" => 21, "2018" => 0, "2019" => 0, "2020" => 0},
+             "Vinicius" => %{"2016" => 0, "2017" => 0, "2018" => 0, "2019" => 0, "2020" => 0}
+           }
+         }}
+
+      assert response == expected_response
+    end
+  end
 end
